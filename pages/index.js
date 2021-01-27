@@ -1,14 +1,13 @@
-import styled from 'styled-components'
-import db from '../db.json'
+/* eslint-disable react/jsx-one-expression-per-line */
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import db from '../db.json';
 import Widget from '../src/components/Widget';
 import Footer from '../src/components/Footer';
-import GitHubCorner from '../src/components/GitHubCorner'
-import QuizBackground from '../src/components/QuizBackground'
-
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.secondary};
-`
+import GitHubCorner from '../src/components/GitHubCorner';
+import QuizBackground from '../src/components/QuizBackground';
+import QuizLogo from '../src/components/QuizLogo';
 
 // const BackgroundImage = styled.div`
 //   background-image: url(${db.bg});
@@ -28,19 +27,35 @@ export const QuizContainer = styled.div`
   }
 `;
 
-
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push(`/quiz?name=${name}`);
+  };
+
+  const handleChange = ({ target }) => {
+    setName(target.value);
+  };
+
   return (
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
+        <QuizLogo />
         <Widget>
           <Widget.Header>
             <h1>The legend of zelda</h1>
 
           </Widget.Header>
-        
           <Widget.Content>
-            <p>lorem input...</p>
+            <form onSubmit={handleSubmit}>
+              <input value={name} onChange={handleChange} placeholder="Dê o seu nome para jogar" />
+              <button type="submit" disabled={name.length === 0}>
+                Jogar { name }
+              </button>
+            </form>
 
           </Widget.Content>
         </Widget>
@@ -51,9 +66,9 @@ export default function Home() {
           </Widget.Content>
         </Widget>
 
-        <Footer/>
+        <Footer />
       </QuizContainer>
-      <GitHubCorner projectUrl="https://github.com/eulaludmila"/>
+      <GitHubCorner projectUrl="https://github.com/eulaludmila" />
     </QuizBackground>
-  )
+  );
 }

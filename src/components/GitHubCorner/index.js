@@ -1,4 +1,4 @@
-// src/components/GitHubCorner/index.js
+/* eslint-disable linebreak-style */
 import React from 'react';
 import styled from 'styled-components';
 
