@@ -19,6 +19,10 @@ module.exports = {
   ],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    "'inebreak-style": 0,
+    'linebreak-style': 0,
+    'arrow-body-style': ['error', 'always'],
+    'eol-last': ['error', 'always'],
+    'react/jsx-one-expression-per-line': [true, 'single-child'],
+    // 'object-curly-newline': ['error', { 'consistent': true }],
   },
 };

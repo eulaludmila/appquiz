@@ -16,7 +16,8 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     font-family: 'Lato', sans-serif;
     // Deixa branco no começo
-    color: ${({ theme }) => theme.colors.contrastText};
+    color: ${({ theme }) => { return theme.colors.contrastText; }};
+    outline:none;
   }
   html, body {
     min-height: 100vh;
@@ -43,5 +44,5 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </ThemeProvider>
     </>
-  )
+  );
 }

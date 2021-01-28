@@ -1,28 +1,54 @@
 {
-    "bg": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/06/css-is-awesome-scaled.jpg?resize=1536%2C1208&ssl=1",
-    "title": "Quiz CSS da Alura",
-    "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
+    "bg": "https://i.annihil.us/u/prod/marvel/images/OpenGraph-TW-1200x630.jpg",
+    "title": "Quiz Marvel da Alura",
+    "description": "Teste os seus conhecimentos sobre a Marvel",
     "questions": [
       {
-        "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-        "title": "Como fazer um seletor por id via CSS?",
+        "image": "https://3.bp.blogspot.com/-T6IYHj-MrOU/VOn_eQLkfqI/AAAAAAAAMDw/g-IRArnrHF0/s1600/Os%2BVingadores%2B4.gif",
+        "title": "Qual desses personagens não possui um filme solo?",
         "description": "Essa é pra aquecer",
         "answer": 2,
         "alternatives": [
-          ".elemento",
-          "*elemento",
-          "#elemento",
-          "%elemento"
+          "Homem de Ferro",
+          "Capitão América",
+          "Viúva Negra",
+          "Doutor Estranho"
         ]
       },
       {
         "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-        "title": "Como fazer um background gradiente com css?",
+        "title": "Qual filme aparece a irmã do Thor?",
+        "description": "Faz tempo em haha",
+        "answer": 3,
+        "alternatives": [
+           "Thor:  Mundo Sombrio",
+           "Vingadores",
+           "Vingadores: Ultimato",
+           "Thor: Ragnarok"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
+        "title": "Qual o nome do martelo de Thor?",
         "description": "Faz tempo em haha",
         "answer": 0,
         "alternatives": [
-           "background: linear-gradient(#e66465, #9198e5);",
-           "background: gradient(#e66465, #9198e5);"
+           "Mjolnir",
+           "Mijolnir",
+           "Mijolner",
+           "Mijolnar"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
+        "title": "Quantas são as jóis do infinito?",
+        "description": "Faz tempo em haha",
+        "answer": 1,
+        "alternatives": [
+           "7",
+           "6",
+           "8",
+           "5"
         ]
       }
     ],
@@ -31,8 +57,8 @@
     ],
     "theme": {
       "colors": {
-        "primary": "#76ff03",
-        "secondary": "#29b6f6",
+        "primary": "#ffa000",
+        "secondary": "#d50000",
         "mainBg": "#171B35",
         "contrastText": "#FFFFFF",
         "wrong": "#FF5722",

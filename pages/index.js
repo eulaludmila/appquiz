@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -8,6 +7,8 @@ import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizLogo from '../src/components/QuizLogo';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
 
 // const BackgroundImage = styled.div`
 //   background-image: url(${db.bg});
@@ -51,10 +52,10 @@ export default function Home() {
           </Widget.Header>
           <Widget.Content>
             <form onSubmit={handleSubmit}>
-              <input value={name} onChange={handleChange} placeholder="Dê o seu nome para jogar" />
-              <button type="submit" disabled={name.length === 0}>
-                Jogar { name }
-              </button>
+              <Input value={name} onChange={handleChange} placeholder="Dê o seu nome para jogar" name="nome" />
+              <Button type="submit" disabled={name.length === 0}>
+                JOGAR { name }
+              </Button>
             </form>
 
           </Widget.Content>
@@ -68,7 +69,7 @@ export default function Home() {
 
         <Footer />
       </QuizContainer>
-      <GitHubCorner projectUrl="https://github.com/eulaludmila" />
+      <GitHubCorner projectUrl="https://github.com/eulaludmila/appquiz" />
     </QuizBackground>
   );
 }
