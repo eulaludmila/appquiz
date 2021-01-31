@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/router';
 import db from '../db.json';
 import Widget from '../src/components/Widget';
@@ -9,6 +10,7 @@ import QuizBackground from '../src/components/QuizBackground';
 import QuizLogo from '../src/components/QuizLogo';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button';
+import Link from '../src/components/Link';
 
 // const BackgroundImage = styled.div`
 //   background-image: url(${db.bg});
@@ -45,29 +47,74 @@ export default function Home() {
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
         <QuizLogo />
-        <Widget>
+        <Widget
+          as={motion.section}
+          transition={{duration: 0.5, delay: 0}}
+          variants={{
+            show: { opacity: 1, y: '0' },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"
+        >
           <Widget.Header>
-            <h1>The legend of zelda</h1>
+            <h1>#React</h1>
 
           </Widget.Header>
           <Widget.Content>
             <form onSubmit={handleSubmit}>
               <Input value={name} onChange={handleChange} placeholder="Dê o seu nome para jogar" name="nome" />
               <Button type="submit" disabled={name.length === 0}>
-                JOGAR { name }
+                JOGAR {name}
               </Button>
             </form>
 
           </Widget.Content>
         </Widget>
-        <Widget>
+        <Widget
+          as={motion.section}
+          transition={{duration: 0.5, delay: 0.3}}
+          variants={{
+            show: { opacity: 1, y: '0' },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"  >
           <Widget.Content>
             <h1>Quizes da galera</h1>
-            <p>lorem input...</p>
+
+            <ul>
+              {
+                db.external.map((link, index) => {
+                  const [projectName, gitHubUser] = link
+                    .replace(/\//g, '')
+                    .replace('https:', '')
+                    .replace('.vercel.app', '')
+                    .split('.');
+                  return (
+                    <li key={index}>
+                      <Widget.Topic data-quiz={name.length === 0} as={Link} href={`/quiz/${projectName}___${gitHubUser}`}>
+                        {`${gitHubUser}/${projectName}`}
+                      </Widget.Topic>
+                    </li>
+                  )
+                })
+              }
+
+            </ul>
           </Widget.Content>
         </Widget>
 
-        <Footer />
+        <Footer 
+          as={motion.section}
+          transition={{duration: 0.5, delay: 0.6}}
+          variants={{
+            show: { opacity: 1, y: '0' },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"  
+        />
       </QuizContainer>
       <GitHubCorner projectUrl="https://github.com/eulaludmila/appquiz" />
     </QuizBackground>

@@ -63,6 +63,11 @@ Widget.Topic = styled.a`
   &:focus {
     opacity: .5;
   }
+
+  &[data-quiz="true"]{
+    background-color: #979797;
+    cursor: not-allowed;
+  }
 `;
 
 

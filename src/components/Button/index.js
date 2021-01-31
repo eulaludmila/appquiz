@@ -13,6 +13,12 @@ const ButtonBase = styled.button`
   border:none;
   cursor: pointer;
   text-transform: uppercase;
+
+  &:disabled{
+    background-color: #979797;
+    cursor: not-allowed;
+  }
+
 `;
 
 const Button = (props) => {

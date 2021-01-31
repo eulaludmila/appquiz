@@ -1,26 +1,61 @@
-import React, { useEffect } from 'react';
-import db from '../db.json';
-import Widget from '../src/components/Widget';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizLogo from '../src/components/QuizLogo';
-import QuizContainer from '../src/components/QuizContainer';
-import AlternativesForm from '../src/components/AlternativesForm';
-import Button from '../src/components/Button';
+import React, { useEffect, useState } from 'react';
+import Widget from '../Widget';
+import QuizBackground from '../QuizBackground';
+import QuizLogo from '../QuizLogo';
+import QuizContainer from '../QuizContainer';
+import AlternativesForm from '../AlternativesForm';
+import Button from '../Button';
+import BackLinkArrow from '../BackLinkArrow'
+import Lottie from 'react-lottie'
+import animationData from '../../screens/Quiz/animations/loading.json'
+import parabensData from '../../screens/Quiz/animations/parabens.json'
 
 function LoadingScreen() {
+
+  const [animateState, setAnimateState] = useState({
+    isStopped: false, isPaused: false
+  });
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
   return (
     <Widget>
       <Widget.Header>
         Carregando...
       </Widget.Header>
-      <Widget.Content>
-        [Desafio do Loading]
+      <Widget.Content style={{ display: 'flex', justifyContent: 'center' }}>
+        <Lottie
+          options={defaultOptions}
+          width="200px"
+          height="200px"
+          isStopped={animateState.isStopped}
+          isPaused={animateState.isPaused} />
       </Widget.Content>
     </Widget>
   )
 }
 
 function ResultWidget({ results }) {
+
+  const [animateState, setAnimateState] = useState({
+    isStopped: false, isPaused: false
+  });
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: parabensData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
 
   return (
     <Widget>
@@ -42,6 +77,13 @@ function ResultWidget({ results }) {
             })
           }
         </ul>
+
+        <Lottie
+          options={defaultOptions}
+          width="100%"
+          height="200px"
+          isStopped={animateState.isStopped}
+          isPaused={animateState.isPaused} />
       </Widget.Content>
     </Widget>
   )
@@ -58,6 +100,7 @@ const QuestionWidget = ({ question, totalQuestions, questionIndex, onSubmit, add
   return (
     <Widget>
       <Widget.Header>
+        <BackLinkArrow href="/" />
         <h3>Pergunta {questionIndex + 1} de {totalQuestions}</h3>
       </Widget.Header>
       <img
@@ -86,9 +129,9 @@ const QuestionWidget = ({ question, totalQuestions, questionIndex, onSubmit, add
         }}>
           {
             question.alternatives.map((alternative, alternativeIndex) => {
-              const alternativeId = `altenative_${alternativeIndex}`
+              const alternativeId = `altenative_${questionIndex}_${alternativeIndex}`
               //Verificando se é a alternativa correta
-              const alternativeStatus = isCorrect ? 'SUCCESS': 'ERROR';
+              const alternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
               const isSelected = selectedAlternative === alternativeIndex;
 
               return (
@@ -115,13 +158,18 @@ const screenStates = {
   RESULT: 'RESULT',
 }
 
-export default function QuizPage() {
+export default function QuizPage({ questionsDB }) {
 
+  //Lógica de troca de tela
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
-  const totalQuestions = db.questions.length;
+  //total de questões
+  const totalQuestions = questionsDB.questions.length;
+  //início das questões em zero
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
-  const question = db.questions[questionIndex];
+  //pergar todas as alternativas da questão
+  const question = questionsDB.questions[questionIndex];
+  //array de resultados
   const [results, setResults] = React.useState([]);
 
   function addResult(result) {
@@ -134,7 +182,7 @@ export default function QuizPage() {
   useEffect(() => {
     setTimeout(() => {
       setScreenState(screenStates.QUIZ);
-    }, 1 * 1000);
+    }, 1 * 5000);
   }, [])
 
   function handleSubmitQuiz() {
@@ -148,7 +196,7 @@ export default function QuizPage() {
   }
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <QuizBackground backgroundImage={questionsDB.bg}>
       <QuizContainer>
         <QuizLogo />
         {screenState === screenStates.QUIZ &&
