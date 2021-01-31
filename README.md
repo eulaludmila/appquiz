@@ -6,7 +6,14 @@ App quiz build with next js and styled-components
 
 ## Getting Started
 
-First, run the development server:
+First, install node_modules library :
+
+```bash
+npm install
+#or
+yarn add
+```
+Second, run the development server:
 
 ```bash
 npm run dev
